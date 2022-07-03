@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from "apollo-server";
 import { readFile } from "fs/promises";
+import { buildSubgraphSchema } from "@apollo/subgraph";
 
 import resolvers from "./resolvers.js";
 import ReviewsApi from "./datasources/reviews-api.js";
@@ -7,8 +8,10 @@ import ReviewsApi from "./datasources/reviews-api.js";
 const typeDefs = gql(await readFile("./reviews.graphql", "utf8"));
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema: buildSubgraphSchema({
+    typeDefs,
+    resolvers,
+  }),
   context() {
     return {
       dataSources: {

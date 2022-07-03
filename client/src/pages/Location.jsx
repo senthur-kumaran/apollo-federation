@@ -23,12 +23,12 @@ export const GET_LOCATION_DETAILS = gql`
       name
       description
       photo
-      # overallRating
-      # reviews {
-      #   id
-      #   comment
-      #   rating
-      # }
+      overallRating
+      reviews {
+        id
+        comment
+        rating
+      }
     }
   }
 `;

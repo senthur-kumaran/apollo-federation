@@ -1,3 +1,7 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key"])
+
 type Query {
   latestReviews: [Review!]!
 }
@@ -12,6 +16,14 @@ type Review {
   comment: String
   "A number from 1 - 5 with 1 being lowest and 5 being highest"
   rating: Int
+
+  location: Location
+}
+
+type Location @key(fields: "id") {
+  id: ID!
+  overallRating: Float
+  reviews: [Review!]
 }
 
 input ReviewInput {

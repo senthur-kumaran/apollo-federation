@@ -3,12 +3,15 @@ import { readFile } from "fs/promises";
 
 import resolvers from "./resolvers.js";
 import LocationsAPI from "./datasources/locations-api.js";
+import { buildSubgraphSchema } from "@apollo/subgraph";
 
 const typeDefs = gql(await readFile("./locations.graphql", "utf8"));
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema: buildSubgraphSchema({
+    typeDefs,
+    resolvers,
+  }),
   context() {
     return {
       dataSources: {

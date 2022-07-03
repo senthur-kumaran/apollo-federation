@@ -8,4 +8,9 @@ export default {
       return dataSources.locationsAPI.getLocation(id);
     },
   },
+  Location: {
+    __resolveReference(location, { dataSources }) {
+      return dataSources.locationsAPI.getLocation(location.id);
+    },
+  },
 };
